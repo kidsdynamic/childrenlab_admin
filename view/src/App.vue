@@ -29,9 +29,7 @@
 <script>
 
   export default {
-    components: {
-
-    },
+    components: {},
     computed: {
       isLoggedIn: {
         get() {
@@ -40,7 +38,7 @@
       }
     },
     methods: {
-      logout: function() {
+      logout: function () {
         this.$store.dispatch('logout').then(() => {
           window.location = '/login';
         });
@@ -51,6 +49,9 @@
 
 <style src="vue-material/dist/vue-material.css"></style>
 <style lang="scss">
+    html {
+        scroll-behavior: smooth;
+    }
     body {
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         margin: 0;
@@ -58,6 +59,8 @@
     }
 
     #app {
+        padding-bottom: 15px;
+
         legend {
             padding-bottom: 5px;
             margin-bottom: 20px;
@@ -98,6 +101,7 @@
         background-color: rgba(255, 255, 255, .5);
         justify-content: center;
         align-items: center;
+        text-align: center;
     }
 
 

@@ -24,7 +24,7 @@ const auth = {
   },
   actions: {
     login({commit}, credential) {
-      return axios.post("/admin/login", {
+      return axios.post("/admin/api/login", {
         name: credential.name,
         password: credential.password
       }).then((result) => {

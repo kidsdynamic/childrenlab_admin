@@ -5,24 +5,23 @@ const dashboardStore = {
     totalUserCount: 0,
     signup: [],
     totalActivityCount: 0,
-    activity: [],
-    activityByEventDate: [],
+    dashboardActivity: [],
+    dashboardActivityByEventDate: [],
   },
   getters: {
     signup: state => state.signup,
     totalUserCount: state => state.totalUserCount,
     totalActivityCount: state => state.totalActivityCount,
-    activity: state => state.activity,
-    activityByEventDate: state => state.activityByEventDate
+    dashboardActivity: state => state.dashboardActivity,
+    dashboardActivityByEventDate: state => state.dashboardActivityByEventDate
 
   },
   mutations: {
     updateDashboard(state, data) {
-      console.log(data);
-      state.signup.push(...data.signup);
+      state.signup = data.signup;
       state.totalUserCount = data.totalUserCount;
       state.totalActivityCount = data.totalActivityCount;
-      state.activity = data.activity;
+      state.dashboardActivity = data.activity;
       state.activityByEventDate = data.activityByEventDate;
     }
   },

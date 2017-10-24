@@ -2,21 +2,30 @@ import axios from 'axios';
 
 const userStore = {
   state: {
-    user: []
+    totalUser: 0,
+    user: [],
+    userPage: 1,
   },
   getters: {
     user: state => state.user,
+    totalUser: state => state.totalUser,
+    userPage: state => state.page,
 
   },
   mutations: {
-    updateUser(state, data) {
-      console.log(data);
-      state.user = data;
+    updateUser(state, result) {
+      state.user = result.data;
+      state.totalUser = result.total;
     }
   },
   actions: {
-    getUser({commit}) {
-      return axios.get("/admin/api/user", {}).then((result) => {
+    getUser({commit}, pagination) {
+      return axios.get("/admin/api/user", {
+        params: {
+          max: pagination.max,
+          page: pagination.page
+        }
+      }).then((result) => {
         if (result.status === 200) {
           commit('updateUser', result.data);
 

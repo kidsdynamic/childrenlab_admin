@@ -5,46 +5,11 @@ import (
 
 	"fmt"
 
-	"time"
-
 	"database/sql"
 
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 )
-
-type AdminSignUpRequest struct {
-	Name      string `json:"name" binding:"required"`
-	Password  string `json:"password" binding:"required"`
-	FirstName string `json:"first_name" binding:"required"`
-	LastName  string `json:"last_name" binding:"required"`
-}
-
-type Role struct {
-	ID        int64  `db:"id",json:"-"`
-	Authority string `db:"authority",json:"authority"`
-}
-
-type User struct {
-	ID                       int64     `db:"id",json:"id"`
-	Email                    string    `db:"email",json:"email"`
-	Password                 string    `db:"password",json:"-"`
-	FirstName                string    `db:"first_name",json:"firstName"`
-	LastName                 string    `db:"last_name",json:"lastName"`
-	LastUpdated              time.Time `db:"last_updated",json:"lastUpdate"`
-	DateCreated              time.Time `db:"date_created",json:"dateCreated"`
-	ZipCode                  string    `db:"zip_code",json:"zipCode"`
-	PhoneNumber              string    `db:"phone_number",json:"phoneNumber"`
-	Profile                  *string   `db:"profile",json:"profile"`
-	Language                 string    `db:"language",json:"language"`
-	RegistrationID           string    `db:"registration_id",json:"ios_registration_id"`
-	AndroidRegistrationToken *string   `db:"android_registration_token",json:"android_registration_id"`
-	Role                     Role      `db:"role",json:"-"`
-	RoleID                   int64     `db:"role_id",json:"-"`
-	ResetPasswordToken       *string   `db:"reset_password_token",json:"-"`
-	SignUpIP                 *string   `db:"sign_up_ip",json:"-"`
-	SignUpCountryCode        *string   `db:"sign_up_country_code",json:"country"`
-}
 
 // Only for internal use
 func CreateAdminUser(c *gin.Context) {

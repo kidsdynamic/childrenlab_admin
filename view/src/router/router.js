@@ -3,6 +3,10 @@ import Login from '../page/login.vue';
 import store from '../store/store';
 import Dashboard from '../page/dashboard.vue';
 import User from '../page/user.vue';
+import Kid from '../page/kid.vue';
+import RawActivity from '../page/rawActivity.vue';
+import Activity from '../page/activity.vue';
+import Battery from '../page/battery.vue';
 
 
 const router = new VueRouter({
@@ -23,6 +27,25 @@ const router = new VueRouter({
     {
       path: '/user',
       component: User,
+    },
+    {
+      path: '/kid',
+      component: Kid
+    },
+    {
+      path: '/kid/rawActivity/:macId',
+      component: RawActivity,
+      props: true
+    },
+    {
+      path: '/kid/activity/:macId',
+      component: Activity,
+      props: true
+    },
+    {
+      path: '/kid/battery/:macId',
+      component: Battery,
+      props: true
     }
   ]
 });

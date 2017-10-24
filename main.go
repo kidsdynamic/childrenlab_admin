@@ -99,12 +99,20 @@ func main() {
 		adminAuthAPI.Use(controller.AdminAuth)
 		adminAuthAPI.GET("/dashboard", controller.Dashboard)
 		adminAuthAPI.GET("/user", controller.GetAllUser)
+		adminAuthAPI.GET("/kid", controller.GetAllKidList)
+		adminAuthAPI.GET("/kid/rawActivity/:macID", controller.GetActivityRawForAdmin)
+		adminAuthAPI.GET("/kid/activity/:macID", controller.GetActivityListForAdmin)
+		adminAuthAPI.GET("/kid/battery/:macID", controller.GetBatteryStatus)
 
 		//Page
 		r.GET("/", indexPage)
 		r.GET("/login", indexPage)
 		r.GET("/dashboard", indexPage)
 		r.GET("/user", indexPage)
+		r.GET("/kid", indexPage)
+		r.GET("/kid/rawActivity/:macID", indexPage)
+		r.GET("/kid/activity/:macID", indexPage)
+		r.GET("/kid/battery/:macID", indexPage)
 
 		return r.Run(fmt.Sprintf(":%s", c.String("port")))
 

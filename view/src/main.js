@@ -4,6 +4,7 @@ import axios from 'axios';
 import App from './App.vue'
 import router from './router/router';
 import store from './store/store';
+import favicon from './assets/favicon.ico';
 
 let VueMaterial = require('vue-material');
 Vue.use(VueMaterial);

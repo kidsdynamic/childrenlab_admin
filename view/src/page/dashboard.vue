@@ -4,8 +4,9 @@
 
         <div class="">
             <h3>
-                Daily Signup: {{totalUserCount}}
+                Daily Signup
             </h3>
+            <md-table-card>
             <md-table>
                 <md-table-header>
                     <md-table-row>
@@ -21,10 +22,12 @@
                     </md-table-row>
                 </md-table-body>
             </md-table>
+            </md-table-card>
 
             <h3>
                 Total Activities: {{totalActivityCount}}
             </h3>
+            <md-table-card>
             <md-table>
                 <md-table-header>
                     <md-table-row>
@@ -37,7 +40,7 @@
                 </md-table-header>
 
                 <md-table-body>
-                    <md-table-row v-for="(a, index) in activity" :key="index">
+                    <md-table-row v-for="(a, index) in dashboardActivity" :key="index">
                         <md-table-cell>{{ a.ActivityCount }}</md-table-cell>
                         <md-table-cell>{{ a.IndoorSteps }}</md-table-cell>
                         <md-table-cell>{{ a.OutdoorSteps }}</md-table-cell>
@@ -46,6 +49,7 @@
                     </md-table-row>
                 </md-table-body>
             </md-table>
+            </md-table-card>
         </div>
     </div>
 
@@ -73,7 +77,7 @@
         'signup',
         'totalUserCount',
         'totalActivityCount',
-        'activity'
+        'dashboardActivity'
       ])
     },
 
