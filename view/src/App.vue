@@ -84,7 +84,7 @@
         }
 
         .container {
-            padding: 0 15px;
+            padding: 0 35px;
         }
 
         .menu {

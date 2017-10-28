@@ -6,6 +6,7 @@ import userStore from './user.store';
 import kidStore from './kid.store';
 import activityStore from './activity.store';
 import batteryStore from './battery.store';
+import fwStore from './fw.store';
 
 Vue.use(Vuex);
 
@@ -16,7 +17,8 @@ const store = new Vuex.Store({
     userStore,
     kidStore,
     activityStore,
-    batteryStore
+    batteryStore,
+    fwStore
   }
 });
 

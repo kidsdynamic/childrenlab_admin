@@ -11,10 +11,6 @@ Vue.use(VueMaterial);
 Vue.use(VueRouter);
 
 Vue.material.registerTheme({
-    default: {
-        primary: 'grey',
-        accent: 'blue'
-    },
 });
 
 axios.defaults.headers.common['x-auth-token'] = store.state.auth.token || '';
