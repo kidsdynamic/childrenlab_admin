@@ -129,8 +129,7 @@ func AdminAuth(c *gin.Context) {
 
 	if err := db.Get(&user, "select u.* from user u join authentication_token a ON u.email = a.email JOIN role ON u.role_id = role.id "+
 		"where a.token = ? and (authority = ? or authority = ?)", authToken, "ROLE_ADMIN", "ROLE_SUPER_ADMIN"); err != nil {
-		fmt.Println(err)
-		fmt.Println("test")
+
 		c.JSON(http.StatusForbidden, gin.H{})
 		c.Abort()
 		return

@@ -2,16 +2,16 @@
     <div class="login-component" v-if="!loggedIn">
         <legend>Admin Server</legend>
         <form>
-            <label class="error-message label-danger label">Please enter valid credential</label>
+            <!--<label class="error-message label-danger label">Please enter valid credential</label>-->
             <md-input-container>
                 <label>Name</label>
                 <md-input v-model="name" required></md-input>
             </md-input-container>
-            <md-input-container>
+            <md-input-container md-has-password>
                 <label>Password</label>
                 <md-input type="password" v-model="password" required></md-input>
             </md-input-container>
-            <md-button class="md-raised md-primary" @click="clicked">Login</md-button>
+            <md-button class="md-raised md-warn" @click="clicked">Login</md-button>
 
             <div class="loading" v-if="loading">
                 <md-spinner md-indeterminate></md-spinner>

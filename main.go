@@ -8,6 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/kidsdynamic/childrenlab_admin/config"
 	"github.com/kidsdynamic/childrenlab_admin/controller"
 	"github.com/urfave/cli"
 )
@@ -60,6 +61,12 @@ func main() {
 			Usage:  "",
 		},
 		cli.StringFlag{
+			EnvVar: "S3_BASE_URL",
+			Name:   "s3_base_url",
+			Value:  "https://childrenlabqa.s3.amazonaws.com",
+			Usage:  "",
+		},
+		cli.StringFlag{
 			EnvVar: "PORT",
 			Name:   "port",
 			Value:  "8114",
@@ -74,6 +81,8 @@ func main() {
 			Password: c.String("database_password"),
 			IP:       c.String("database_IP"),
 		})
+
+		config.SetConfig(c.String("s3_base_url"), c.String("base_url"))
 
 		controller.SuperAdminToken = c.String("super_admin_token")
 
@@ -103,6 +112,7 @@ func main() {
 		adminAuthAPI.GET("/kid/rawActivity/:macID", controller.GetActivityRawForAdmin)
 		adminAuthAPI.GET("/kid/activity/:macID", controller.GetActivityListForAdmin)
 		adminAuthAPI.GET("/kid/battery/:macID", controller.GetBatteryStatus)
+		adminAuthAPI.GET("/fw", controller.GetFwFileList)
 
 		//Page
 		r.GET("/", indexPage)
@@ -112,7 +122,7 @@ func main() {
 		r.GET("/kid", indexPage)
 		r.GET("/kid/rawActivity/:macID", indexPage)
 		r.GET("/kid/activity/:macID", indexPage)
-		r.GET("/kid/battery/:macID", indexPage)
+		r.GET("/fw", indexPage)
 
 		return r.Run(fmt.Sprintf(":%s", c.String("port")))
 
@@ -122,5 +132,8 @@ func main() {
 }
 
 func indexPage(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", gin.H{})
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"S3BaseURL": config.ConfigSettings.S3BasedURL,
+		"BaseURL":   config.ConfigSettings.BaseURL,
+	})
 }
