@@ -18,6 +18,8 @@ var database Database
 
 func SetupDatabase(db Database) {
 	database = db
+	fmt.Printf("%#v", database)
+
 }
 
 func NewDB() *sqlx.DB {

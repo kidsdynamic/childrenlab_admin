@@ -1,4 +1,7 @@
+.PHONY: deps vet test dev cp build clean buildFront
+
 PACKAGES = $(shell glide novendor)
+DOCKER_REPO_URL = jack08300/childrenlab_admin
 
 deps:
 	dep ensure
@@ -11,7 +14,23 @@ dev:
 	DATABASE_IP=104.236.47.92:3306 \
 	DATABASE_DEBUG=true \
 	DATABASE_USER=root \
-	DATABASE_PASSWORD=koe7POut \
+	DATABASE_PASSWORD=12345 \
 	DEBUG=true \
 	PORT=1323 \
 	gin -p 8114 -a 1323 -x node_modules
+
+build: clean buildFront
+	GOOS=linux go build -o ./build/main *.go
+
+clean:
+	rm -f view/build/*
+	rm -rf build/*
+	find . -name '*.test' -delete
+
+push-image:
+	docker tag childrenlab_admin $(DOCKER_REPO_URL):latest
+	docker push $(DOCKER_REPO_URL):latest
+
+buildFront:
+	yarn build
+

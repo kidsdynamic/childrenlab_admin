@@ -85,10 +85,8 @@
 <script>
   import Vue from 'vue';
   import {mapGetters} from 'vuex'
-  import MdCardContent from "../../node_modules/vue-material/src/components/mdCard/mdCardContent.vue";
 
   export default {
-    components: {MdCardContent},
     name: "FwManagement",
     data: () => {
       return {

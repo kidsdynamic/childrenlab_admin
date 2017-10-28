@@ -106,6 +106,7 @@ func main() {
 		r.POST("/admin/api/login", controller.Login)
 		adminAuthAPI := r.Group("/admin/api")
 		adminAuthAPI.Use(controller.AdminAuth)
+		adminAuthAPI.GET("/checkAuth", controller.CheckAuth)
 		adminAuthAPI.GET("/dashboard", controller.Dashboard)
 		adminAuthAPI.GET("/user", controller.GetAllUser)
 		adminAuthAPI.GET("/kid", controller.GetAllKidList)

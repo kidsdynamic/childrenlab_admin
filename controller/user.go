@@ -48,3 +48,7 @@ func GetAllUser(c *gin.Context) {
 		"total": totalNumber,
 	})
 }
+
+func CheckAuth(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{})
+}
