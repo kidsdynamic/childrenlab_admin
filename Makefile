@@ -1,4 +1,4 @@
-.PHONY: deps vet test dev cp build clean buildFront
+.PHONY: deps vet test dev build clean buildFront
 
 PACKAGES = $(shell glide novendor)
 DOCKER_REPO_URL = jack08300/childrenlab_admin
@@ -34,3 +34,5 @@ push-image:
 buildFront:
 	yarn build
 
+build-image:
+	docker build --rm -t childrenlab_admin:latest .

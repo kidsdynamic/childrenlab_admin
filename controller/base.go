@@ -60,6 +60,7 @@ var SuperAdminToken string
 
 func storeToken(db *sqlx.DB, accessToken model.AccessToken) error {
 	var existToken model.AccessToken
+	fmt.Printf("\n%#v\n", accessToken)
 	if err := db.Get(&existToken, "SELECT * FROM authentication_token WHERE email = ?", accessToken.Email); err != nil {
 		if err != sql.ErrNoRows {
 			return errors.Wrap(err, "Error on retrieve auth")
@@ -74,7 +75,7 @@ func storeToken(db *sqlx.DB, accessToken model.AccessToken) error {
 			return errors.Wrap(err, "Error on update token")
 		}
 	} else {
-		if _, err := db.NamedExec("INSERT INTO authentication_token (email, token, access_count, last_updated) VALUES (:email, :token, :access_count, :last_updated)", &existToken); err != nil {
+		if _, err := db.NamedExec("INSERT INTO authentication_token (email, token, access_count, last_updated) VALUES (:email, :token, :access_count, :last_updated)", &accessToken); err != nil {
 			return errors.Wrap(err, "Error on insert token")
 		}
 	}
