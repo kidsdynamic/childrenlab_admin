@@ -27,7 +27,7 @@ clean:
 	rm -rf build/*
 	find . -name '*.test' -delete
 
-push-image:
+push-image: build build-image
 	docker tag childrenlab_admin $(DOCKER_REPO_URL):latest
 	docker push $(DOCKER_REPO_URL):latest
 

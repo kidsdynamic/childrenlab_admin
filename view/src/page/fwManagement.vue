@@ -49,6 +49,7 @@
                     <md-table-header>
                         <md-table-row>
                             <md-table-head>ID</md-table-head>
+                            <md-table-head>Version</md-table-head>
                             <md-table-head>File A</md-table-head>
                             <md-table-head>File B</md-table-head>
                             <md-table-head>Uploaded Date</md-table-head>
@@ -58,6 +59,7 @@
                     <md-table-body>
                         <md-table-row v-for="(a, index) in localFwList" :key="index" :md-item="a">
                             <md-table-cell>{{ a.ID }}</md-table-cell>
+                            <md-table-cell>{{ a.Version }}</md-table-cell>
                             <md-table-cell>
                                 <a :href="a.FileAURL">
                                     {{ a.Version }}_A
