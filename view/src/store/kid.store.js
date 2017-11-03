@@ -17,6 +17,14 @@ const kidStore = {
       state.kids = result.data;
       state.totalKidCount = result.totalKidCount;
       state.kidPage = result.page;
+    },
+    deleteKid(state, macId) {
+      state.totalKidCount -= 1;
+      for(let i = 0; i < state.kids.length; i++) {
+        if(state.kids[i].MacID === macId) {
+          state.kids.splice(i, 1);
+        }
+      }
     }
   },
   actions: {
@@ -32,6 +40,12 @@ const kidStore = {
 
         }
       })
+    },
+
+    deleteKid({ commit }, macId) {
+      return axios.delete(`/admin/api/kid/deleteMacID?macId=${macId}`).then((result) => {
+        commit('deleteKid', macId);
+      });
     }
   }
 };

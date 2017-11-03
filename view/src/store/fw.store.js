@@ -34,6 +34,15 @@ const fwStore = {
           'enctype': 'multipart/form-data',
         }
       })
+    },
+
+    updateActivation({ commit }, params) {
+      return axios.put('/admin/api/fw/updateActivation', {
+        id: params.id,
+        active: params.active
+      }).then((result) => {
+        commit('updateFwList', result.data);
+      })
     }
   }
 };

@@ -61,3 +61,19 @@ func GetAllKidList(c *gin.Context) {
 		"page":          page,
 	})
 }
+
+func DeleteMacID(c *gin.Context) {
+	macID := c.Query("macId")
+
+	db := NewDB()
+	if _, err := db.Exec("delete from kids where mac_id = ?", macID); err != nil {
+		fmt.Printf("%+v", errors.Wrapf(err, "Error on deleting kid. Mac ID: %s", macID))
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Something wrong when deleting kid from database",
+			"error":   err,
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{})
+}

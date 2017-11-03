@@ -33,7 +33,9 @@
                         <md-table-cell>{{ a.FirmwareVersion }}</md-table-cell>
                         <md-table-cell>{{ a.ParentEmail }}</md-table-cell>
                         <md-table-cell>{{ a.DateCreated }}</md-table-cell>
-                        <md-table-cell>Delete</md-table-cell>
+                        <md-table-cell>
+                            <md-button class="md-warn md-dense" @click="deleteKid(a.MacID)">Delete</md-button>
+                        </md-table-cell>
                     </md-table-row>
                 </md-table-body>
             </md-table>
@@ -60,7 +62,9 @@
     name: "Kid",
     data: () => {
       return {
-        max: 20
+        max: 20,
+        page: 1,
+        confirmationText: "",
       }
 
     },
@@ -82,9 +86,28 @@
 
     methods: {
       onPagination: function(context) {
+        this.page = context.page;
+        this.max = context.max;
+
+        this.updateKidList();
+      },
+
+      deleteKid: function(macId) {
+        let retVal = confirm(`Do you want to delete mac ID: ${macId}?`);
+        if( retVal === true ){
+          this.$store.dispatch('deleteKid', macId);
+          return true;
+        }
+        else{
+          return false;
+        }
+
+      },
+
+      updateKidList: function() {
         this.$store.dispatch('getKids', {
-          page: context.page,
-          max: context.size
+          page: this.page,
+          max: this.max
         }).then(() => {
           window.scrollTo(0, 0);
         })
@@ -95,7 +118,7 @@
 </script>
 
 <style lang="scss" scoped>
-    h3 {
-
+    .md-table .md-table-cell .md-button {
+        min-width: 88px;
     }
 </style>

@@ -53,6 +53,7 @@
                             <md-table-head>File A</md-table-head>
                             <md-table-head>File B</md-table-head>
                             <md-table-head>Uploaded Date</md-table-head>
+                            <md-table-head>Active</md-table-head>
                         </md-table-row>
                     </md-table-header>
 
@@ -71,6 +72,9 @@
                                 </a>
                             </md-table-cell>
                             <md-table-cell>{{ a.UploadedDate }}</md-table-cell>
+                            <md-table-cell>
+                                <md-switch v-model="a.Active" @change="updateActivation(a.ID, !a.Active)" class="md-primary"></md-switch>
+                            </md-table-cell>
                         </md-table-row>
                     </md-table-body>
                 </md-table>
@@ -99,7 +103,6 @@
           'English',
           'OLD'
         ],
-        localFwList: [],
         fileA: null,
         fileB: null,
         version: null,
@@ -116,7 +119,10 @@
     computed: {
       ...mapGetters([
         'fwList',
-      ])
+      ]),
+      localFwList: function() {
+        return this.fwList;
+      }
     },
 
     methods: {
@@ -124,24 +130,23 @@
         this.$store.dispatch('getAllVersion', {}).then(() => {
           this.showUploadSection = false;
           this.isLoaded = true;
-          this.localFwList = this.$store.getters.fwList;
         })
       },
       updateList(selected) {
         if (selected === 'English') {
-          this.localFwList = this.$store.getters.fwList.filter(
+          this.localFwList = this.fwList.filter(
             fw => fw.Version.indexOf('-E') !== -1
           );
         } else if (selected === 'Japanese') {
-          this.localFwList = this.$store.getters.fwList.filter(
+          this.localFwList = this.fwList.filter(
             fw => fw.Version.indexOf('-J') !== -1
           );
         } else if (selected === 'OLD') {
-          this.localFwList = this.$store.getters.fwList.filter(
+          this.localFwList = this.fwList.filter(
             fw => fw.Version.indexOf('-A') !== -1
           );
         } else {
-          this.localFwList = this.$store.getters.fwList;
+          this.localFwList = this.fwList;
         }
       },
 
@@ -163,6 +168,13 @@
 
       setFileB(fileB) {
         this.fileB = fileB;
+      },
+
+      updateActivation(id, active) {
+        this.$store.dispatch('updateActivation', {
+          id: id,
+          active: active,
+        })
       }
     }
   }
@@ -197,4 +209,10 @@
         }
     }
 
+</style>
+
+<style lang="scss">
+    .md-table .md-table-cell .md-table-cell-container {
+        padding: 0 32px 0 24px;
+    }
 </style>

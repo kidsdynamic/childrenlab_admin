@@ -113,7 +113,9 @@ func main() {
 		adminAuthAPI.GET("/kid/rawActivity/:macID", controller.GetActivityRawForAdmin)
 		adminAuthAPI.GET("/kid/activity/:macID", controller.GetActivityListForAdmin)
 		adminAuthAPI.GET("/kid/battery/:macID", controller.GetBatteryStatus)
+		adminAuthAPI.DELETE("/kid/deleteMacID", controller.DeleteMacID)
 		adminAuthAPI.GET("/fw", controller.GetFwFileList)
+		adminAuthAPI.PUT("/fw/updateActivation", controller.UpdateActivation)
 
 		//Page
 		r.GET("/", indexPage)
