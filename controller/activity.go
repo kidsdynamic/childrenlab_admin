@@ -63,7 +63,7 @@ func GetActivityListForAdmin(c *gin.Context) {
 	db := NewDB()
 	defer db.Close()
 
-	macID := c.Param("macID")
+	kidID := c.Param("kidID")
 	max, page, err := GetMaxAndPage(*c)
 	if err != nil {
 		fmt.Printf("%+v", errors.Wrap(err, "Error on parse string to int"))
@@ -74,7 +74,7 @@ func GetActivityListForAdmin(c *gin.Context) {
 	}
 
 	var activity []Activity
-	if err := db.Select(&activity, "select id, mac_id, type, steps, received_date from activity where mac_id = ? order by received_date desc limit ?,?", macID, (max*page)-max, max); err != nil {
+	if err := db.Select(&activity, "select id, mac_id, type, steps, received_date from activity where kid_id = ? order by received_date desc limit ?,?", kidID, (max*page)-max, max); err != nil {
 		fmt.Printf("%+v", errors.Wrap(err, "Error on getting activities from Admin"))
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Error on getting activities",
@@ -84,7 +84,7 @@ func GetActivityListForAdmin(c *gin.Context) {
 	}
 
 	var totalCount int
-	if err := db.Get(&totalCount, "select count(*) from activity where mac_id = ?", macID); err != nil {
+	if err := db.Get(&totalCount, "select count(*) from activity where kid_id = ?", kidID); err != nil {
 		fmt.Printf("%+v", errors.Wrap(err, "Error on getting activities count from Admin"))
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Error on getting activities",

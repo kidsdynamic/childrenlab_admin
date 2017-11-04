@@ -22,8 +22,11 @@ axios.interceptors.response.use((response) => {
     return response;
   }
 }, (error) => {
-  store.dispatch('logout');
-  router.go('/login');
+  if(error.indexOf('403') !== -1) {
+    store.dispatch('logout');
+    router.go('/login');
+  }
+
 });
 
 new Vue({
