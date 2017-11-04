@@ -14,6 +14,17 @@ Vue.material.registerTheme({
 });
 
 axios.defaults.headers.common['x-auth-token'] = store.state.auth.token || '';
+axios.interceptors.response.use((response) => {
+  if(response.status === 403) {
+    store.dispatch('logout');
+    router.go('/login');
+  } else {
+    return response;
+  }
+}, (error) => {
+  store.dispatch('logout');
+  router.go('/login');
+});
 
 new Vue({
   el: '#app',

@@ -40,7 +40,19 @@ const auth = {
 
     logout({commit}) {
       return commit('removeCredential');
+    },
+
+    checkToken({commit}) {
+      return axios.get('/admin/api/checkAuth').then((result) => {
+        if(result.status === 200) {
+          return true;
+        }
+        return false;
+      }).catch((err) => {
+        return false;
+      });
     }
+
   }
 };
 export default auth;
