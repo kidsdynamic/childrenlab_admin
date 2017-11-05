@@ -14,6 +14,9 @@ Vue.material.registerTheme({
 });
 
 axios.defaults.headers.common['x-auth-token'] = store.state.auth.token || '';
+axios.defaults.validateStatus = (status) => {
+  return (status >= 200 && status < 300) || status === 403;
+}
 axios.interceptors.response.use((response) => {
   if(response.status === 403) {
     store.dispatch('logout');
@@ -22,11 +25,7 @@ axios.interceptors.response.use((response) => {
     return response;
   }
 }, (error) => {
-  if(error.indexOf('403') !== -1) {
-    store.dispatch('logout');
-    router.go('/login');
-  }
-
+  console.error(error);
 });
 
 new Vue({
