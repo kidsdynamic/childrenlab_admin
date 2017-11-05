@@ -26,7 +26,7 @@
                         <md-table-cell>{{ a.id }}</md-table-cell>
                         <md-table-cell>
                             <router-link :to="`/kid/activity/${a.id}`">Activity</router-link>|
-                            <router-link :to="`/kid/rawActivity/${a.macId}`">Raw Data</router-link>|
+                            <router-link :to="`/kid/rawActivity/${a.macId}`">Raw</router-link>|
                             <router-link :to="`/kid/battery/${a.macId}`">Battery</router-link>
                         </md-table-cell>
                         <md-table-cell>{{ a.activity }}</md-table-cell>
@@ -36,7 +36,10 @@
                         <md-table-cell>{{ a.parentEmail }}</md-table-cell>
                         <md-table-cell>{{ a.dateCreated }}</md-table-cell>
                         <md-table-cell>
-                            <md-button class="md-warn md-dense" @click="deleteKid(a.macId)">Delete</md-button>
+
+                            <md-button class="md-icon-button md-accent" @click="deleteKid(a.macId)">
+                                <md-icon class="md-warn">delete</md-icon>
+                            </md-button>
                         </md-table-cell>
                     </md-table-row>
                 </md-table-body>
@@ -119,7 +122,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .md-table .md-table-cell .md-button {
-        min-width: 88px;
-    }
+    /*.md-table .md-table-cell .md-button {*/
+        /*min-width: 88px;*/
+    /*}*/
 </style>

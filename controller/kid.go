@@ -17,7 +17,7 @@ type Kid struct {
 	MacID           string    `db:"mac_id" json:"macId"`
 	FirmwareVersion *string   `db:"firmware_version" json:"firmwareVersion"`
 	Profile         *string   `db:"profile" json:"profile"`
-	ParentEmail     string    `db:"parent_email" json:"parent omitempty"`
+	ParentEmail     string    `db:"parent_email" json:"parentEmail"`
 	Activity        int64     `db:"activity" json:"activity"`
 }
 
