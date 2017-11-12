@@ -13,6 +13,12 @@ func GetAllUser(c *gin.Context) {
 	db := NewDB()
 	defer db.Close()
 
+	searchEmail := c.Query("searchEmail")
+	var searchQuery string
+	if searchEmail != "" {
+		searchQuery = fmt.Sprintf("and email like '%%%s%%'", searchEmail)
+	}
+
 	max, page, err := GetMaxAndPage(*c)
 	if err != nil {
 		fmt.Printf("%+v", errors.Wrap(err, "Error on parse string to int"))
@@ -23,8 +29,9 @@ func GetAllUser(c *gin.Context) {
 	}
 
 	var userList []User
-	if err := db.Select(&userList, "select user.id, email, first_name, last_name, profile, registration_id, android_registration_token, sign_up_country_code, date_created"+
-		" from user join role ON role.id = user.role_id where role.authority = 'ROLE_USER' order by date_created desc LIMIT ?,?", (max*page)-max, max); err != nil {
+	query := fmt.Sprintf("select user.id, email, first_name, last_name, profile, registration_id, android_registration_token, sign_up_country_code, date_created"+
+		" from user join role ON role.id = user.role_id where role.authority = 'ROLE_USER' %s order by date_created desc LIMIT ?,?", searchQuery)
+	if err := db.Select(&userList, query, (max*page)-max, max); err != nil {
 		fmt.Printf("%+v", errors.Wrap(err, "Error on retriving user list from admin"))
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Error on retriving user list",
@@ -34,7 +41,11 @@ func GetAllUser(c *gin.Context) {
 	}
 
 	var totalNumber int
-	if err := db.Get(&totalNumber, "select count(*) from user"); err != nil {
+	if searchEmail != "" {
+		searchQuery = fmt.Sprintf("where email like '%%%s%%'", searchEmail)
+	}
+	query = fmt.Sprintf("select count(*) from user %s", searchQuery)
+	if err := db.Get(&totalNumber, query); err != nil {
 		fmt.Printf("%+v", errors.Wrap(err, "Error on count users"))
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Error on count users",

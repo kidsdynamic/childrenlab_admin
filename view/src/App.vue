@@ -52,6 +52,7 @@
     html {
         scroll-behavior: smooth;
     }
+
     body {
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         margin: 0;
@@ -104,6 +105,11 @@
         text-align: center;
     }
 
+    .loader {
+        display: flex;
+        justify-content: center;
+        padding: 15px;
+    }
+
 
 </style>
-ywsx113

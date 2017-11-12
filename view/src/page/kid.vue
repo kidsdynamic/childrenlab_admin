@@ -1,11 +1,15 @@
 <template>
-    <div class="dashboard-component">
+    <div class="kid-component">
         <legend>Kid</legend>
         <h3>
             Total Kid: {{totalKidCount}}
         </h3>
-        <md-table-card>
+        <md-table-card v-if="kids.length > 0">
 
+            <md-input-container md-clearable class="searchInput">
+                <label>Search Email</label>
+                <md-input v-model="searchEmail" @keyup.native="search"></md-input>
+            </md-input-container>
             <md-table>
                 <md-table-header>
                     <md-table-row>
@@ -25,8 +29,10 @@
                     <md-table-row v-for="(a, index) in kids" :key="index" :md-item="a">
                         <md-table-cell>{{ a.id }}</md-table-cell>
                         <md-table-cell>
-                            <router-link :to="`/kid/activity/${a.id}`">Activity</router-link>|
-                            <router-link :to="`/kid/rawActivity/${a.macId}`">Raw</router-link>|
+                            <router-link :to="`/kid/activity/${a.id}`">Activity</router-link>
+                            |
+                            <router-link :to="`/kid/rawActivity/${a.macId}`">Raw</router-link>
+                            |
                             <router-link :to="`/kid/battery/${a.macId}`">Battery</router-link>
                         </md-table-cell>
                         <md-table-cell>{{ a.activity }}</md-table-cell>
@@ -54,13 +60,15 @@
                     @pagination="onPagination"></md-table-pagination>
 
         </md-table-card>
+        <div class="loader" v-if="loading">
+            <md-spinner md-indeterminate></md-spinner>
+        </div>
     </div>
 
 
 </template>
 
 <script>
-  import Vue from 'vue';
   import {mapGetters} from 'vuex'
 
   export default {
@@ -69,16 +77,14 @@
       return {
         max: 20,
         page: 1,
-        confirmationText: "",
+        searchEmail: '',
+        loading: true,
       }
 
     },
 
     created: function () {
-      this.$store.dispatch('getKids', {
-        page: this.kidPage,
-        max: this.max
-      })
+      this.updateKidList();
     },
 
     computed: {
@@ -90,39 +96,49 @@
     },
 
     methods: {
-      onPagination: function(context) {
+      onPagination(context) {
         this.page = context.page;
 
         this.updateKidList();
       },
 
-      deleteKid: function(macId) {
+      deleteKid(macId) {
         let retVal = confirm(`Do you want to delete mac ID: ${macId}?`);
-        if( retVal === true ){
+        if (retVal === true) {
           this.$store.dispatch('deleteKid', macId);
           return true;
         }
-        else{
+        else {
           return false;
         }
 
       },
 
-      updateKidList: function() {
+      search() {
+        this.updateKidList();
+      },
+
+      updateKidList: function () {
+        this.loading = true;
         this.$store.dispatch('getKids', {
           page: this.page,
-          max: this.max
+          max: this.max,
+          searchEmail: this.searchEmail,
         }).then(() => {
           window.scrollTo(0, 0);
+          this.loading = false;
         })
       }
-    }
+    },
   }
 
 </script>
 
 <style lang="scss" scoped>
-    /*.md-table .md-table-cell .md-button {*/
-        /*min-width: 88px;*/
-    /*}*/
+    .kid-component {
+        .searchInput {
+            width: 250px;
+            left: 10px;
+        }
+    }
 </style>

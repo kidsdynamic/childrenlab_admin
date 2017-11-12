@@ -37,9 +37,16 @@ func GetAllKidList(c *gin.Context) {
 		})
 	}
 
+	searchEmail := c.Query("searchEmail")
+	var searchQuery string
+	if searchEmail != "" {
+		searchQuery = fmt.Sprintf("where u.email like '%%%s%%'", searchEmail)
+	}
+
+	query := fmt.Sprintf("select k.id, k.name, k.date_created, k.mac_id, k.firmware_version, k.profile, u.email as parent_email, count(a.id) as activity from"+
+		" kids k left join user u on k.parent_id=u.id left join activity a on a.kid_id = k.id %s group by k.id order by date_created desc limit ?, ?", searchQuery)
 	var kids []Kid
-	if err := db.Select(&kids, "select k.id, k.name, k.date_created, k.mac_id, k.firmware_version, k.profile, u.email as parent_email, count(a.id) as activity from"+
-		" kids k left join user u on k.parent_id=u.id left join activity a on a.kid_id = k.id group by k.id order by date_created desc limit ?, ?", (max*page)-max, max); err != nil {
+	if err := db.Select(&kids, query, (max*page)-max, max); err != nil {
 
 		fmt.Printf("%+v", errors.Wrapf(err, "Error on retriving kid list: %#v", kids))
 		c.JSON(http.StatusInternalServerError, gin.H{

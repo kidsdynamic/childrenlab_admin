@@ -62,12 +62,6 @@ func UpdateActivation(c *gin.Context) {
 	db := NewDB()
 	defer db.Close()
 
-	if _, err := db.Exec("update fw_file set active = ?", false); err != nil {
-		fmt.Printf("%+v", errors.Wrap(err, "Error on update fw active"))
-		c.JSON(http.StatusInternalServerError, err)
-		return
-	}
-
 	if _, err := db.Exec("update fw_file set active = ? where id = ?", request.Active, request.ID); err != nil {
 		fmt.Printf("%+v", errors.Wrap(err, "Error on update fw active"))
 		c.JSON(http.StatusInternalServerError, err)

@@ -19,11 +19,12 @@ const userStore = {
     }
   },
   actions: {
-    getUser({commit}, pagination) {
+    getUser({commit}, params) {
       return axios.get("/admin/api/user", {
         params: {
-          max: pagination.max,
-          page: pagination.page
+          max: params.max,
+          page: params.page,
+          searchEmail: params.searchEmail,
         }
       }).then((result) => {
         if (result.status === 200) {
