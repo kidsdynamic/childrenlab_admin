@@ -33,7 +33,8 @@ const kidStore = {
         params: {
           max: params.max,
           page: params.page,
-          searchEmail: params.searchEmail,
+          searchField: params.searchField,
+          searchText: params.searchText,
         }
       }).then((result) => {
         if (result.status === 200) {

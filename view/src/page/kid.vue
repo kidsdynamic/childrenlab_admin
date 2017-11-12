@@ -5,11 +5,19 @@
             Total Kid: {{totalKidCount}}
         </h3>
         <md-table-card v-if="kids.length > 0">
+            <div class="filter-container">
+                <md-input-container class="searchField">
+                    <label for="filter">Search Field</label>
+                    <md-select name="filter" id="filter" v-model="searchField">
+                        <md-option v-for="field in searchFields" :value="field">{{ field }}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container md-clearable class="searchInput">
+                    <label>Search {{ searchField }}</label>
+                    <md-input v-model="searchText" @keyup.native="search"></md-input>
+                </md-input-container>
+            </div>
 
-            <md-input-container md-clearable class="searchInput">
-                <label>Search Email</label>
-                <md-input v-model="searchEmail" @keyup.native="search"></md-input>
-            </md-input-container>
             <md-table>
                 <md-table-header>
                     <md-table-row>
@@ -77,8 +85,13 @@
       return {
         max: 20,
         page: 1,
-        searchEmail: '',
+        searchText: '',
         loading: true,
+        searchField: 'Email',
+        searchFields: [
+          'Email',
+          'Mac ID'
+        ]
       }
 
     },
@@ -114,8 +127,10 @@
 
       },
 
-      search() {
-        this.updateKidList();
+      search(key) {
+        if(key.code === 'Enter') {
+          this.updateKidList();
+        }
       },
 
       updateKidList: function () {
@@ -123,7 +138,8 @@
         this.$store.dispatch('getKids', {
           page: this.page,
           max: this.max,
-          searchEmail: this.searchEmail,
+          searchField: this.searchField,
+          searchText: this.searchText,
         }).then(() => {
           window.scrollTo(0, 0);
           this.loading = false;
@@ -136,9 +152,18 @@
 
 <style lang="scss" scoped>
     .kid-component {
+        .filter-container {
+            display: flex;
+            padding: 15px 0 0 5px;
+        }
         .searchInput {
             width: 250px;
+            left: 30px;
+        }
+
+        .searchField {
             left: 10px;
+            width: 120px;
         }
     }
 </style>

@@ -37,10 +37,15 @@ func GetAllKidList(c *gin.Context) {
 		})
 	}
 
-	searchEmail := c.Query("searchEmail")
+	searchField := c.Query("searchField")
 	var searchQuery string
-	if searchEmail != "" {
-		searchQuery = fmt.Sprintf("where u.email like '%%%s%%'", searchEmail)
+	if searchField != "" {
+		searchText := c.Query("searchText")
+		if searchField == "Email" {
+			searchQuery = fmt.Sprintf("where u.email like '%%%s%%'", searchText)
+		} else {
+			searchQuery = fmt.Sprintf("where k.mac_id like '%%%s%%'", searchText)
+		}
 	}
 
 	query := fmt.Sprintf("select k.id, k.name, k.date_created, k.mac_id, k.firmware_version, k.profile, u.email as parent_email, count(a.id) as activity from"+
