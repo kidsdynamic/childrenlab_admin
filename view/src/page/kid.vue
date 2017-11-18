@@ -9,7 +9,7 @@
                 <md-input-container class="searchField">
                     <label for="filter">Search Field</label>
                     <md-select name="filter" id="filter" v-model="searchField">
-                        <md-option v-for="field in searchFields" :value="field">{{ field }}</md-option>
+                        <md-option v-for="field in searchFields" :key="field" :value="field">{{ field }}</md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container md-clearable class="searchInput">

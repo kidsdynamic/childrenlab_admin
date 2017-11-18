@@ -10,7 +10,7 @@
                 <md-input-container>
                     <label for="filter">Filter</label>
                     <md-select name="filter" id="filter" @change="updateList">
-                        <md-option v-for="filter in filterList" :value="filter">{{ filter }}</md-option>
+                        <md-option v-for="filter in filterList" :key="filter" :value="filter">{{ filter }}</md-option>
                     </md-select>
                 </md-input-container>
             </div>

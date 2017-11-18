@@ -6,29 +6,19 @@
             <h3>
                 Daily Signup
             </h3>
-            <md-table-card>
-                <md-table>
-                    <md-table-header>
-                        <md-table-row>
-                            <md-table-head>Sign-up Count</md-table-head>
-                            <md-table-head>Date</md-table-head>
-                        </md-table-row>
-                    </md-table-header>
-
-                    <md-table-body>
-                        <md-table-row v-for="(s, index) in signup" :key="index">
-                            <md-table-cell>{{ s.SignupCount }}</md-table-cell>
-                            <md-table-cell>{{ s.Date }}</md-table-cell>
-                        </md-table-row>
-                    </md-table-body>
-                </md-table>
-            </md-table-card>
+            <md-card>
+                <daily-signup :sourceData="signup"></daily-signup>
+            </md-card>
 
             <h3>
                 Total Activities: {{totalActivityCount}}
             </h3>
             <md-table-card>
-                <md-table>
+                <md-card>
+                    <activity-chart :sourceData="dashboardActivity"></activity-chart>
+                </md-card>
+
+<!--                <md-table>
                     <md-table-header>
                         <md-table-row>
                             <md-table-head>Activity Count</md-table-head>
@@ -48,7 +38,7 @@
                             <md-table-cell>{{ a.Date }}</md-table-cell>
                         </md-table-row>
                     </md-table-body>
-                </md-table>
+                </md-table>-->
             </md-table-card>
         </div>
         <div v-else>
@@ -64,12 +54,19 @@
 <script>
   import Vue from 'vue';
   import {mapGetters} from 'vuex'
+  import dailySignup from '../charts/signupChart'
+  import activityChart from '../charts/activityChart'
 
   export default {
     name: "Dashboard",
     data: () => {
       return {}
 
+    },
+
+    components: {
+      dailySignup,
+      activityChart,
     },
 
     created: function () {

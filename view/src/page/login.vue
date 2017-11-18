@@ -9,7 +9,7 @@
             </md-input-container>
             <md-input-container md-has-password>
                 <label>Password</label>
-                <md-input type="password" v-model="password" required></md-input>
+                <md-input type="password" v-model="password" @keyup.native="enter" required></md-input>
             </md-input-container>
             <md-button class="md-raised md-warn" @click="clicked">Login</md-button>
 
@@ -53,6 +53,12 @@
           this.loading = false;
           window.location = "/"
         });
+      },
+
+      enter: function(key) {
+        if(key.code === 'Enter') {
+          this.clicked();
+        }
       }
     }
   };
