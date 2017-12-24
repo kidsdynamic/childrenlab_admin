@@ -50,7 +50,7 @@ func GetAllKidList(c *gin.Context) {
 
 	query := fmt.Sprintf("select k.id, k.name, k.date_created, k.mac_id, k.firmware_version, k.profile, u.email as parent_email, count(a.id) as activity from"+
 		" kids k left join user u on k.parent_id=u.id left join activity a on a.kid_id = k.id %s group by k.id order by date_created desc limit ?, ?", searchQuery)
-	var kids []Kid
+	kids := make([]Kid, 0)
 	if err := db.Select(&kids, query, (max*page)-max, max); err != nil {
 
 		fmt.Printf("%+v", errors.Wrapf(err, "Error on retriving kid list: %#v", kids))

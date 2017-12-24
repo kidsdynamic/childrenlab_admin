@@ -16,6 +16,9 @@
                 <router-link to="/kid">
                     <md-button class="md-raised md-dense">Kid</md-button>
                 </router-link>
+                <router-link to="/event">
+                    <md-button class="md-raised md-dense">Event</md-button>
+                </router-link>
                 <router-link to="/fw">
                     <md-button class="md-raised md-dense">FW Management</md-button>
                 </router-link>

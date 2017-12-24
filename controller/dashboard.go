@@ -64,5 +64,18 @@ func Dashboard(c *gin.Context) {
 		}
 		dashboard.ActivityByEventDate = activityCountOnEventDate*/
 
+	var eventCount []model.EventCountByDate
+	if err := db.Select(&eventCount, "select count(*) as event, DATE_FORMAT(DATE(date_created), '%Y/%m/%d') as date from event group by date order by date desc LIMIT 14"); err != nil {
+		fmt.Printf("%+v", errors.Wrap(err, "Error on retrieve event dashboard from Admin"))
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+	dashboard.Event = eventCount
+	if err := db.Get(&dashboard.TotalEventCount, "select count(*) from event"); err != nil {
+		fmt.Printf("%+v", errors.Wrap(err, "Error on retrieve TotalEventCount dashboard from Admin"))
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+
 	c.JSON(http.StatusOK, dashboard)
 }

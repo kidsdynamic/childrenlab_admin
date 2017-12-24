@@ -17,28 +17,15 @@
                 <md-card>
                     <activity-chart :sourceData="dashboardActivity"></activity-chart>
                 </md-card>
+            </md-table-card>
 
-<!--                <md-table>
-                    <md-table-header>
-                        <md-table-row>
-                            <md-table-head>Activity Count</md-table-head>
-                            <md-table-head>Indoor Steps</md-table-head>
-                            <md-table-head>Outdoor Steps</md-table-head>
-                            <md-table-head>User Count</md-table-head>
-                            <md-table-head>Date</md-table-head>
-                        </md-table-row>
-                    </md-table-header>
-
-                    <md-table-body>
-                        <md-table-row v-for="(a, index) in dashboardActivity" :key="index">
-                            <md-table-cell>{{ a.ActivityCount }}</md-table-cell>
-                            <md-table-cell>{{ a.IndoorSteps }}</md-table-cell>
-                            <md-table-cell>{{ a.OutdoorSteps }}</md-table-cell>
-                            <md-table-cell>{{ a.UserCount }}</md-table-cell>
-                            <md-table-cell>{{ a.Date }}</md-table-cell>
-                        </md-table-row>
-                    </md-table-body>
-                </md-table>-->
+            <h3>
+                Total Events: {{totalEventCount}}
+            </h3>
+            <md-table-card>
+                <md-card>
+                    <event-chart :sourceData="dashboardEvent"></event-chart>
+                </md-card>
             </md-table-card>
         </div>
         <div v-else>
@@ -56,6 +43,7 @@
   import {mapGetters} from 'vuex'
   import dailySignup from '../charts/signupChart'
   import activityChart from '../charts/activityChart'
+  import eventChart from '../charts/eventChart'
 
   export default {
     name: "Dashboard",
@@ -67,6 +55,7 @@
     components: {
       dailySignup,
       activityChart,
+      eventChart,
     },
 
     created: function () {
@@ -79,7 +68,9 @@
         'signup',
         'totalUserCount',
         'totalActivityCount',
-        'dashboardActivity'
+        'dashboardActivity',
+        'dashboardEvent',
+        'totalEventCount'
       ])
     },
 

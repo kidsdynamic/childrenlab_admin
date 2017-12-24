@@ -4,7 +4,6 @@
         <h3>
             Total Kid: {{totalKidCount}}
         </h3>
-        <md-table-card v-if="kids.length > 0">
             <div class="filter-container">
                 <md-input-container class="searchField">
                     <label for="filter">Search Field</label>
@@ -14,10 +13,10 @@
                 </md-input-container>
                 <md-input-container md-clearable class="searchInput">
                     <label>Search {{ searchField }}</label>
-                    <md-input v-model="searchText" @keyup.native="search"></md-input>
+                    <md-input  v-model="searchText" @keyup.native="search"></md-input>
                 </md-input-container>
             </div>
-
+        <md-table-card v-if="kids.length > 0">
             <md-table>
                 <md-table-header>
                     <md-table-row>
@@ -66,11 +65,21 @@
                     md-separator="of"
                     :md-page-options="false"
                     @pagination="onPagination"></md-table-pagination>
-
         </md-table-card>
+
+        <div class="emptyState" v-show="!loading && kids.length == 0">
+            No Data
+        </div>
+
+
         <div class="loader" v-if="loading">
             <md-spinner md-indeterminate></md-spinner>
         </div>
+
+        <md-snackbar md-position="center" :md-duration="3000" :md-active.sync="showMessage" md-persistent>
+            <span>{{ message }}</span>
+            <md-button class="md-primary" @click="showSnackbar = false">Retry</md-button>
+        </md-snackbar>
     </div>
 
 
@@ -91,7 +100,9 @@
         searchFields: [
           'Email',
           'Mac ID'
-        ]
+        ],
+        showMessage: false,
+        message: '',
       }
 
     },
@@ -165,5 +176,13 @@
             left: 10px;
             width: 120px;
         }
+    }
+    .emptyState {
+        font-size: 2em;
+        text-align: center;
+        background-color: darkgray;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
     }
 </style>

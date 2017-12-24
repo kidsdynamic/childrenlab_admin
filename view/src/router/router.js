@@ -4,6 +4,7 @@ import store from '../store/store';
 import Dashboard from '../page/dashboard.vue';
 import User from '../page/user.vue';
 import Kid from '../page/kid.vue';
+import Event from '../page/event.vue';
 import RawActivity from '../page/rawActivity.vue';
 import Activity from '../page/activity.vue';
 import Battery from '../page/battery.vue';
@@ -46,6 +47,11 @@ const router = new VueRouter({
     {
       path: '/kid/battery/:macId',
       component: Battery,
+      props: true
+    },
+    {
+      path: '/event',
+      component: Event,
       props: true
     },
     {

@@ -117,6 +117,8 @@ func main() {
 		adminAuthAPI.GET("/fw", controller.GetFwFileList)
 		adminAuthAPI.PUT("/fw/updateActivation", controller.UpdateActivation)
 
+		adminAuthAPI.GET("/event", controller.GetAllEvents)
+
 		//Page
 		r.GET("/", indexPage)
 		r.GET("/login", indexPage)
@@ -125,6 +127,7 @@ func main() {
 		r.GET("/kid", indexPage)
 		r.GET("/kid/rawActivity/:macID", indexPage)
 		r.GET("/kid/activity/:macID", indexPage)
+		r.GET("/event", indexPage)
 		r.GET("/fw", indexPage)
 
 		return r.Run(fmt.Sprintf(":%s", c.String("port")))

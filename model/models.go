@@ -41,6 +41,8 @@ type Dashboard struct {
 	TotalActivityCount  int64                 `json:"totalActivityCount"`
 	Activity            []ActivityCountByDate `json:"activity"`
 	ActivityByEventDate []ActivityCountByDate `json:"activityByEventDate"`
+	Event               []EventCountByDate    `json:"event"`
+	TotalEventCount     int64                 `json:"totalEventCount"`
 }
 
 type SignupCountByDate struct {
@@ -54,4 +56,9 @@ type ActivityCountByDate struct {
 	IndoorSteps   string `db:"indoorSteps",json:"indoorSteps"`
 	OutdoorSteps  string `db:"outdoorSteps",json:"outdoorSteps"`
 	Date          string `db:"date",json:"date"`
+}
+
+type EventCountByDate struct {
+	EventCount int64  `db:"event" json:"eventCount"`
+	Date       string `db:"date" json:"date"`
 }

@@ -7,14 +7,17 @@ const dashboardStore = {
     totalActivityCount: 0,
     dashboardActivity: [],
     dashboardActivityByEventDate: [],
+    event: [],
+    totalEventCount: 0,
   },
   getters: {
     signup: state => state.signup,
     totalUserCount: state => state.totalUserCount,
     totalActivityCount: state => state.totalActivityCount,
     dashboardActivity: state => state.dashboardActivity,
-    dashboardActivityByEventDate: state => state.dashboardActivityByEventDate
-
+    dashboardActivityByEventDate: state => state.dashboardActivityByEventDate,
+    dashboardEvent: state => state.event,
+    totalEventCount: state => state.totalEventCount,
   },
   mutations: {
     updateDashboard(state, data) {
@@ -23,6 +26,8 @@ const dashboardStore = {
       state.totalActivityCount = data.totalActivityCount;
       state.dashboardActivity = data.activity;
       state.activityByEventDate = data.activityByEventDate;
+      state.event = data.event;
+      state.totalEventCount = data.totalEventCount;
     }
   },
   actions: {
