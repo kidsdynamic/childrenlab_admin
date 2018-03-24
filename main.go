@@ -122,7 +122,7 @@ func main() {
 
 		//Page
 		r.GET("/", indexPage)
-		r.GET("/login", indexPage)g
+		r.GET("/login", indexPage)
 		r.GET("/dashboard", indexPage)
 		r.GET("/user", indexPage)
 		r.GET("/kid", indexPage)

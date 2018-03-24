@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="984e1471-811a-4234-adc5-ad79bb074ab4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.go" afterPath="$PROJECT_DIR$/main.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/src/App.vue" afterPath="$PROJECT_DIR$/view/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/src/router/router.js" afterPath="$PROJECT_DIR$/view/src/router/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/src/store/store.js" afterPath="$PROJECT_DIR$/view/src/store/store.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -155,7 +150,7 @@
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="316">
-              <caret line="124" column="35" lean-forward="false" selection-start-line="124" selection-start-column="35" selection-end-line="124" selection-end-column="35" />
+              <caret line="124" column="34" lean-forward="true" selection-start-line="124" selection-start-column="34" selection-end-line="124" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -671,12 +666,12 @@
       <workItem from="1520807130952" duration="2000" />
       <workItem from="1521686251009" duration="1059000" />
       <workItem from="1521856341277" duration="14000" />
-      <workItem from="1521857572316" duration="4493000" />
+      <workItem from="1521857572316" duration="4527000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224663000" />
+    <option name="totallyTimeSpent" value="224697000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="808" y="289" width="1752" height="895" extended-state="0" />
@@ -1081,7 +1076,7 @@
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="316">
-          <caret line="124" column="35" lean-forward="false" selection-start-line="124" selection-start-column="35" selection-end-line="124" selection-end-column="35" />
+          <caret line="124" column="34" lean-forward="true" selection-start-line="124" selection-start-column="34" selection-end-line="124" selection-end-column="34" />
           <folding />
         </state>
       </provider>
