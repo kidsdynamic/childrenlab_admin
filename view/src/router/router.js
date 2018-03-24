@@ -9,6 +9,7 @@ import RawActivity from '../page/rawActivity.vue';
 import Activity from '../page/activity.vue';
 import Battery from '../page/battery.vue';
 import FwManagement from '../page/fwManagement.vue';
+import ErrorDatas from '../page/ErrorDatas.vue';
 
 
 const router = new VueRouter({
@@ -57,6 +58,11 @@ const router = new VueRouter({
     {
       path: '/fw',
       component: FwManagement,
+      props: true
+    },
+    {
+      path: '/errorData',
+      component: ErrorDatas,
       props: true
     }
   ]

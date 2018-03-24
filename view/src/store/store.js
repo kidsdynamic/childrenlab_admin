@@ -8,6 +8,7 @@ import activityStore from './activity.store';
 import batteryStore from './battery.store';
 import fwStore from './fw.store';
 import eventStore from "./event.store";
+import errorStore from "./errorData.store";
 
 Vue.use(Vuex);
 
@@ -20,7 +21,8 @@ const store = new Vuex.Store({
     activityStore,
     batteryStore,
     fwStore,
-    eventStore
+    eventStore,
+    errorStore
   }
 });
 

@@ -22,6 +22,9 @@
                 <router-link to="/fw">
                     <md-button class="md-raised md-dense">FW Management</md-button>
                 </router-link>
+                <router-link to="/errorData">
+                    <md-button class="md-raised md-dense">Error Data</md-button>
+                </router-link>
                 <md-button class="md-raised md-warn md-dense" @click="logout">Logout</md-button>
             </div>
             <router-view></router-view>

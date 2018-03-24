@@ -116,12 +116,13 @@ func main() {
 		adminAuthAPI.DELETE("/kid/deleteMacID", controller.DeleteMacID)
 		adminAuthAPI.GET("/fw", controller.GetFwFileList)
 		adminAuthAPI.PUT("/fw/updateActivation", controller.UpdateActivation)
+		adminAuthAPI.GET("/errorData", controller.ErrorData)
 
 		adminAuthAPI.GET("/event", controller.GetAllEvents)
 
 		//Page
 		r.GET("/", indexPage)
-		r.GET("/login", indexPage)
+		r.GET("/login", indexPage)g
 		r.GET("/dashboard", indexPage)
 		r.GET("/user", indexPage)
 		r.GET("/kid", indexPage)
@@ -129,6 +130,7 @@ func main() {
 		r.GET("/kid/activity/:macID", indexPage)
 		r.GET("/event", indexPage)
 		r.GET("/fw", indexPage)
+		r.GET("/errorData", indexPage)
 
 		return r.Run(fmt.Sprintf(":%s", c.String("port")))
 
